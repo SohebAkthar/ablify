@@ -67,6 +67,12 @@ Provides conversational assistance to help users interact with the platform.
 
 ---
 
+## 📸 Project Screenshots
+
+![ABILIFY Project Screenshots](assets/ABILIFY-all-screenshots.png)
+
+---
+
 ## 🛠️ Technologies Used
 
 ### Frontend
