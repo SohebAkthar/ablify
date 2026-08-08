@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inclusive Job Portal - Abilify</title>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/job-portal.css">
+</head>
+<body class="light-mode">
+
+    <!-- Top Header -->
+    <header class="job-portal-header">
+        <div class="header-content">
+            <!-- Back Button -->
+            <button class="back-btn" onclick="goBackToDashboard()" aria-label="Back to Dashboard">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Dashboard</span>
+            </button>
+            
+            <!-- Logo -->
+            <div class="header-logo">
+                <img src="../assets/abilify-logo.png" alt="Abilify Logo">
+                <span>Job Portal</span>
+            </div>
+            
+            <!-- Header Right Actions -->
+            <div class="header-actions">
+                <!-- Accessibility Tools -->
+                <button class="icon-btn" onclick="toggleFontSize()" aria-label="Adjust Font Size" title="Font Size">
+                    <i class="fas fa-text-height"></i>
+                </button>
+                
+                <button class="icon-btn" onclick="toggleContrast()" aria-label="High Contrast" title="High Contrast">
+                    <i class="fas fa-adjust"></i>
+                </button>
+                
+                <!-- Dark Mode Toggle -->
+                <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle Dark Mode" title="Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <!-- User Menu -->
+                <div class="user-menu">
+                    <button class="user-btn" onclick="toggleUserMenu()" aria-label="User Menu">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="userName">Guest</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="#" onclick="goToProfile()"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#" onclick="goToSavedJobs()"><i class="fas fa-bookmark"></i> Saved Jobs</a>
+                        <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Search Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <i class="fas fa-briefcase"></i> Find Your Dream Job
+            </h1>
+            <p class="hero-subtitle">Inclusive opportunities for everyone. 245 disability-friendly jobs available.</p>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-input-group">
+                    <i class="fas fa-search"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Search jobs, skills, or companies..." 
+                        aria-label="Search jobs"
+                    >
+                </div>
+                
+                <div class="location-input-group">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input 
+                        type="text" 
+                        id="locationInput" 
+                        placeholder="Location (e.g., Bangalore)" 
+                        aria-label="Location"
+                    >
+                </div>
+                
+                <button class="search-btn" onclick="searchJobs()" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                    <span>Search</span>
+                </button>
+            </div>
+            
+            <!-- Quick Filters -->
+            <div class="quick-filters">
+                <span class="filter-label">Quick Filters:</span>
+                <button class="quick-filter-btn active" onclick="filterRemote()">
+                    <i class="fas fa-home"></i> Remote
+                </button>
+                <button class="quick-filter-btn" onclick="filterFullTime()">
+                    <i class="fas fa-briefcase"></i> Full-time
+                </button>
+                <button class="quick-filter-btn" onclick="filterAccessible()">
+                    <i class="fas fa-wheelchair"></i> Disability-Friendly
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            
+            <!-- Sidebar Filters -->
+            <aside class="filters-sidebar" id="filtersSidebar">
+                <div class="sidebar-header">
+                    <h2><i class="fas fa-filter"></i> Filters</h2>
+                    <button class="reset-btn" onclick="resetFilters()">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+                
+                <!-- Job Type Filter -->
+                <div class="filter-group">
+                    <h3>Job Type</h3>
+                    <label class="checkbox-label" for="fullTime">
+                        <input type="checkbox" id="fullTime" checked> Full-time
+                    </label>
+                    <label class="checkbox-label" for="partTime">
+                        <input type="checkbox" id="partTime"> Part-time
+                    </label>
+                    <label class="checkbox-label" for="contract">
+                        <input type="checkbox" id="contract"> Contract
+                    </label>
+                    <label class="checkbox-label" for="internship">
+                        <input type="checkbox" id="internship"> Internship
+                    </label>
+                </div>
+                
+                <!-- Work Mode Filter -->
+                <div class="filter-group">
+                    <h3>Work Mode</h3>
+                    <label class="checkbox-label" for="remote">
+                        <input type="checkbox" id="remote" checked> Remote
+                    </label>
+                    <label class="checkbox-label" for="onsite">
+                        <input type="checkbox" id="onsite"> On-site
+                    </label>
+                    <label class="checkbox-label" for="hybrid">
+                        <input type="checkbox" id="hybrid"> Hybrid
+                    </label>
+                </div>
+                
+                <!-- Experience Level -->
+                <div class="filter-group">
+                    <h3>Experience Level</h3>
+                    <label class="checkbox-label" for="entryLevel">
+                        <input type="checkbox" id="entryLevel"> Entry Level
+                    </label>
+                    <label class="checkbox-label" for="midLevel">
+                        <input type="checkbox" id="midLevel" checked> Mid Level
+                    </label>
+                    <label class="checkbox-label" for="seniorLevel">
+                        <input type="checkbox" id="seniorLevel"> Senior Level
+                    </label>
+                </div>
+                
+                <!-- Accessibility Features -->
+                <div class="filter-group accessibility-group">
+                    <h3><i class="fas fa-universal-access"></i> Accessibility</h3>
+                    <label class="checkbox-label" for="disabilityFriendly">
+                        <input type="checkbox" id="disabilityFriendly" checked> Disability-Friendly
+                    </label>
+                    <label class="checkbox-label" for="wheelchairAccessible">
+                        <input type="checkbox" id="wheelchairAccessible"> Wheelchair Accessible
+                    </label>
+                    <label class="checkbox-label" for="signLanguage">
+                        <input type="checkbox" id="signLanguage"> Sign Language Support
+                    </label>
+                    <label class="checkbox-label" for="flexibleHours">
+                        <input type="checkbox" id="flexibleHours"> Flexible Hours
+                    </label>
+                </div>
+                
+                <!-- Salary Range -->
+                <div class="filter-group">
+                    <h3>Salary Range (LPA)</h3>
+                    <div class="salary-range">
+                        <input type="range" id="salaryRange" min="0" max="50" value="25" step="1" aria-label="Salary Range">
+                        <div class="salary-labels">
+                            <span>₹0</span>
+                            <span id="salaryValue">₹25L</span>
+                            <span>₹50L+</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Job Listings -->
+            <section class="jobs-section">
+                <div class="jobs-header">
+                    <h2 class="results-count">
+                        <i class="fas fa-briefcase"></i> 245 Jobs Found
+                    </h2>
+                    
+                    <div class="sort-controls">
+                        <label for="sortBy">Sort by:</label>
+                        <select id="sortBy" onchange="sortJobs()">
+                            <option value="relevant">Most Relevant</option>
+                            <option value="latest">Latest</option>
+                            <option value="salary-high">Salary: High to Low</option>
+                            <option value="salary-low">Salary: Low to High</option>
+                        </select>
+                    </div>
+                    
+                    <button class="toggle-filters-btn" onclick="toggleFilters()">
+                        <i class="fas fa-sliders-h"></i> Filters
+                    </button>
+                </div>
+
+                <!-- Job Cards Grid -->
+                <div class="jobs-grid" id="jobsGrid">
+                    
+                    <!-- Job Card 1 -->
+                    <div class="job-card" onclick="openJobDetails(1)">
+                        <div class="job-card-header">
+                            <div class="company-logo">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="job-save">
+                                <button class="save-btn" onclick="event.stopPropagation(); toggleSave(1)" aria-label="Save Job">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <h3 class="job-title">Senior Software Developer</h3>
+                        <p class="company-name">Tata Consultancy Services (TCS)</p>
+                        
+                        <div class="job-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Bangalore, India
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-rupee-sign"></i> ₹8-12 LPA
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-briefcase"></i> Full-time
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-home"></i> Remote
+                            </span>
+                        </div>
+                        
+                        <div class="job-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                        </div>
+                        
+                        <div class="job-badges">
+                            <span class="badge badge-accessible">
+                                <i class="fas fa-wheelchair"></i> Disability-Friendly
+                            </span>
+                            <span class="badge badge-verified">
+                                <i class="fas fa-check-circle"></i> Verified
+                            </span>
+                        </div>
+                        
+                        <div class="job-footer">
+                            <span class="posted-time">
+                                <i class="far fa-clock"></i> Posted 2 days ago
+                            </span>
+                            <button class="apply-btn-small" onclick="event.stopPropagation(); applyNow(1)">
+                                Apply Now <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 2 -->
+                    <div class="job-card" onclick="openJobDetails(2)">
+                        <div class="job-card-header">
+                            <div class="company-logo">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="job-save">
+                                <button class="save-btn" onclick="event.stopPropagation(); toggleSave(2)" aria-label="Save Job">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <h3 class="job-title">Data Analyst</h3>
+                        <p class="company-name">Infosys</p>
+                        
+                        <div class="job-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Mumbai, India
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-rupee-sign"></i> ₹6-10 LPA
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-briefcase"></i> Full-time
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-building"></i> Hybrid
+                            </span>
+                        </div>
+                        
+                        <div class="job-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">SQL</span>
+                            <span class="tag">Power BI</span>
+                        </div>
+                        
+                        <div class="job-badges">
+                            <span class="badge badge-accessible">
+                                <i class="fas fa-universal-access"></i> Accessible Workplace
+                            </span>
+                        </div>
+                        
+                        <div class="job-footer">
+                            <span class="posted-time">
+                                <i class="far fa-clock"></i> Posted 5 days ago
+                            </span>
+                            <button class="apply-btn-small" onclick="event.stopPropagation(); applyNow(2)">
+                                Apply Now <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 3 -->
+                    <div class="job-card" onclick="openJobDetails(3)">
+                        <div class="job-card-header">
+                            <div class="company-logo">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="job-save">
+                                <button class="save-btn" onclick="event.stopPropagation(); toggleSave(3)" aria-label="Save Job">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <h3 class="job-title">UX/UI Designer</h3>
+                        <p class="company-name">Wipro Digital</p>
+                        
+                        <div class="job-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Pune, India
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-rupee-sign"></i> ₹7-11 LPA
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-briefcase"></i> Full-time
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-home"></i> Remote
+                            </span>
+                        </div>
+                        
+                        <div class="job-tags">
+                            <span class="tag">Figma</span>
+                            <span class="tag">Adobe XD</span>
+                            <span class="tag">User Research</span>
+                        </div>
+                        
+                        <div class="job-badges">
+                            <span class="badge badge-accessible">
+                                <i class="fas fa-hands-helping"></i> Sign Language Support
+                            </span>
+                            <span class="badge badge-featured">
+                                <i class="fas fa-star"></i> Featured
+                            </span>
+                        </div>
+                        
+                        <div class="job-footer">
+                            <span class="posted-time">
+                                <i class="far fa-clock"></i> Posted 1 week ago
+                            </span>
+                            <button class="apply-btn-small" onclick="event.stopPropagation(); applyNow(3)">
+                                Apply Now <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 4 -->
+                    <div class="job-card" onclick="openJobDetails(4)">
+                        <div class="job-card-header">
+                            <div class="company-logo">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="job-save">
+                                <button class="save-btn" onclick="event.stopPropagation(); toggleSave(4)" aria-label="Save Job">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <h3 class="job-title">Mobile App Developer</h3>
+                        <p class="company-name">Tech Mahindra</p>
+                        
+                        <div class="job-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Hyderabad, India
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-rupee-sign"></i> ₹9-15 LPA
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-briefcase"></i> Full-time
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-building"></i> On-site
+                            </span>
+                        </div>
+                        
+                        <div class="job-tags">
+                            <span class="tag">React Native</span>
+                            <span class="tag">Flutter</span>
+                            <span class="tag">iOS</span>
+                        </div>
+                        
+                        <div class="job-badges">
+                            <span class="badge badge-accessible">
+                                <i class="fas fa-wheelchair"></i> Wheelchair Accessible
+                            </span>
+                        </div>
+                        
+                        <div class="job-footer">
+                            <span class="posted-time">
+                                <i class="far fa-clock"></i> Posted 3 days ago
+                            </span>
+                            <button class="apply-btn-small" onclick="event.stopPropagation(); applyNow(4)">
+                                Apply Now <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 5 -->
+                    <div class="job-card" onclick="openJobDetails(5)">
+                        <div class="job-card-header">
+                            <div class="company-logo">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="job-save">
+                                <button class="save-btn" onclick="event.stopPropagation(); toggleSave(5)" aria-label="Save Job">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <h3 class="job-title">Cybersecurity Analyst</h3>
+                        <p class="company-name">HCL Technologies</p>
+                        
+                        <div class="job-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Chennai, India
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-rupee-sign"></i> ₹10-16 LPA
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-briefcase"></i> Full-time
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-building"></i> Hybrid
+                            </span>
+                        </div>
+                        
+                        <div class="job-tags">
+                            <span class="tag">Network Security</span>
+                            <span class="tag">Ethical Hacking</span>
+                            <span class="tag">CISSP</span>
+                        </div>
+                        
+                        <div class="job-badges">
+                            <span class="badge badge-accessible">
+                                <i class="fas fa-clock"></i> Flexible Hours
+                            </span>
+                            <span class="badge badge-urgent">
+                                <i class="fas fa-bolt"></i> Urgent
+                            </span>
+                        </div>
+                        
+                        <div class="job-footer">
+                            <span class="posted-time">
+                                <i class="far fa-clock"></i> Posted 4 days ago
+                            </span>
+                            <button class="apply-btn-small" onclick="event.stopPropagation(); applyNow(5)">
+                                Apply Now <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Job Card 6 -->
+                    <div class="job-card" onclick="openJobDetails(6)">
+                        <div class="job-card-header">
+                            <div class="company-logo">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="job-save">
+                                <button class="save-btn" onclick="event.stopPropagation(); toggleSave(6)" aria-label="Save Job">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <h3 class="job-title">HR Manager</h3>
+                        <p class="company-name">Accenture</p>
+                        
+                        <div class="job-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Delhi, India
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-rupee-sign"></i> ₹12-18 LPA
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-briefcase"></i> Full-time
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-home"></i> Remote
+                            </span>
+                        </div>
+                        
+                        <div class="job-tags">
+                            <span class="tag">Recruitment</span>
+                            <span class="tag">Employee Relations</span>
+                            <span class="tag">HRIS</span>
+                        </div>
+                        
+                        <div class="job-badges">
+                            <span class="badge badge-accessible">
+                                <i class="fas fa-universal-access"></i> Inclusive Workplace
+                            </span>
+                        </div>
+                        
+                        <div class="job-footer">
+                            <span class="posted-time">
+                                <i class="far fa-clock"></i> Posted 1 day ago
+                            </span>
+                            <button class="apply-btn-small" onclick="event.stopPropagation(); applyNow(6)">
+                                Apply Now <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-container">
+                    <button class="load-more-btn" onclick="loadMoreJobs()">
+                        <i class="fas fa-sync-alt"></i> Load More Jobs
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Job Details Modal -->
+    <div class="modal-overlay" id="jobDetailsModal">
+        <div class="modal-content job-details-modal">
+            <button class="modal-close" onclick="closeJobDetails()" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-body">
+                <div class="job-details-header">
+                    <div class="company-logo-large">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div>
+                        <h2 id="modalJobTitle">Senior Software Developer</h2>
+                        <p id="modalCompanyName">Tata Consultancy Services (TCS)</p>
+                        <div class="job-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i> <span id="modalLocation">Bangalore, India</span>
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-rupee-sign"></i> <span id="modalSalary">₹8-12 LPA</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="save-btn-large" onclick="toggleSaveModal()">
+                            <i class="far fa-bookmark"></i> Save
+                        </button>
+                        <button class="apply-btn-large" onclick="applyFromModal()">
+                            <i class="fas fa-paper-plane"></i> Apply Now
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="job-details-content">
+                    <section class="details-section">
+                        <h3><i class="fas fa-info-circle"></i> Job Description</h3>
+                        <p id="modalDescription">
+                            We are looking for a talented Senior Software Developer to join our team. 
+                            You will be responsible for developing and maintaining high-quality software solutions.
+                        </p>
+                    </section>
+                    
+                    <section class="details-section">
+                        <h3><i class="fas fa-clipboard-list"></i> Key Responsibilities</h3>
+                        <ul id="modalResponsibilities">
+                            <li>Design, develop, and test software applications</li>
+                            <li>Collaborate with cross-functional teams</li>
+                            <li>Write clean, maintainable code</li>
+                            <li>Participate in code reviews</li>
+                        </ul>
+                    </section>
+                    
+                    <section class="details-section">
+                        <h3><i class="fas fa-graduation-cap"></i> Requirements</h3>
+                        <ul id="modalRequirements">
+                            <li>5+ years of software development experience</li>
+                            <li>Proficiency in JavaScript, React, and Node.js</li>
+                            <li>Strong problem-solving skills</li>
+                            <li>Excellent communication abilities</li>
+                        </ul>
+                    </section>
+                    
+                    <section class="details-section">
+                        <h3><i class="fas fa-gift"></i> Benefits</h3>
+                        <ul id="modalBenefits">
+                            <li>Competitive salary package</li>
+                            <li>Health insurance</li>
+                            <li>Flexible work hours</li>
+                            <li>Work from home options</li>
+                            <li>Professional development opportunities</li>
+                        </ul>
+                    </section>
+                    
+                    <section class="details-section accessibility-features">
+                        <h3><i class="fas fa-universal-access"></i> Accessibility Features</h3>
+                        <div class="accessibility-badges">
+                            <span class="badge badge-large badge-accessible">
+                                <i class="fas fa-wheelchair"></i> Wheelchair Accessible Office
+                            </span>
+                            <span class="badge badge-large badge-accessible">
+                                <i class="fas fa-hands-helping"></i> Sign Language Support Available
+                            </span>
+                            <span class="badge badge-large badge-accessible">
+                                <i class="fas fa-clock"></i> Flexible Work Hours
+                            </span>
+                            <span class="badge badge-large badge-accessible">
+                                <i class="fas fa-home"></i> Remote Work Option
+                            </span>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="job-portal-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Abilify - Empowering Every Ability. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="../js/job-portal.js"></script>
+
+</body>
+</html>

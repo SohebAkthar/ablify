@@ -1,0 +1,1023 @@
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Light Mode Colors */
+    --bg-primary: #f5f7fa;
+    --bg-secondary: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #6c757d;
+    --border-color: #e1e8ed;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    --sidebar-bg: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+    --sos-safe: #2ecc71;
+    --sos-emergency: #ff4757;
+}
+
+body.dark-mode {
+    /* Dark Mode Colors */
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --border-color: #3d3d3d;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    --sidebar-bg: linear-gradient(180deg, #0f1e3a 0%, #1a3d6b 100%);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+}
+
+/* ============================================
+   SIDEBAR
+   ============================================ */
+
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: var(--sidebar-bg);
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 25px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Desktop: hide sidebar when active class is added */
+.sidebar.active {
+    transform: translateX(-280px);
+}
+
+/* Sidebar Logo */
+.sidebar-logo {
+    padding: 0 20px 25px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 20px;
+}
+
+.sidebar-logo img {
+    width: 130px;
+    height: auto;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+/* User Profile Card */
+.user-profile-card {
+    padding: 20px;
+    margin: 0 15px 20px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    text-align: center;
+}
+
+.user-avatar i {
+    font-size: 60px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.user-details {
+    margin-top: 12px;
+}
+
+.user-name {
+    font-size: 17px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.user-email {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+    word-break: break-all;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    flex: 1;
+    padding: 0 15px;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.nav-btn i {
+    font-size: 19px;
+    margin-right: 14px;
+    width: 24px;
+    text-align: center;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateX(5px);
+}
+
+.nav-btn.active {
+    background: rgba(255, 255, 255, 0.25);
+    font-weight: 600;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 20px 15px 0 15px;
+}
+
+/* Sidebar Scrollbar */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+/* ============================================
+   MAIN WRAPPER & HEADER
+   ============================================ */
+
+.main-wrapper {
+    margin-left: 280px;
+    min-height: 100vh;
+    transition: margin-left 0.3s ease;
+}
+
+.main-wrapper.expanded {
+    margin-left: 0;
+}
+
+/* Top Header */
+.top-header {
+    background: var(--bg-secondary);
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.toggle-btn {
+    background: var(--bg-primary);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+    font-size: 20px;
+}
+
+.toggle-btn:hover {
+    background: #4a90e2;
+    color: #ffffff;
+}
+
+.page-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* User Dropdown */
+.user-dropdown {
+    position: relative;
+}
+
+.user-dropdown-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.user-dropdown-btn:hover {
+    border-color: #4a90e2;
+}
+
+.user-dropdown-btn i:first-child {
+    font-size: 22px;
+    color: #4a90e2;
+}
+
+.user-dropdown-btn i:last-child {
+    font-size: 12px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 200;
+}
+
+.dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: background 0.2s ease;
+    font-size: 14px;
+}
+
+.dropdown-menu a:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+.dropdown-menu a:last-child {
+    border-radius: 0 0 12px 12px;
+}
+
+.dropdown-menu a:hover {
+    background: var(--bg-primary);
+}
+
+.dropdown-menu a i {
+    font-size: 16px;
+    color: #4a90e2;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+    font-size: 20px;
+}
+
+.theme-toggle:hover {
+    background: #4a90e2;
+    color: #ffffff;
+    border-color: #4a90e2;
+}
+
+/* SOS Button in Header - GREEN by default */
+.sos-btn-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--sos-safe);
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+}
+
+.sos-btn-header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.5);
+}
+
+.sos-btn-header.emergency {
+    background: var(--sos-emergency);
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+    animation: pulse 2s infinite;
+}
+
+.sos-btn-header.emergency:hover {
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5);
+}
+
+.sos-btn-header i {
+    font-size: 18px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(255, 71, 87, 0.7);
+    }
+}
+
+/* ============================================
+   DASHBOARD CONTENT
+   ============================================ */
+
+.dashboard-content {
+    padding: 35px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Welcome Banner */
+.welcome-banner {
+    background: linear-gradient(135deg, #4a90e2 0%, #2a5298 100%);
+    padding: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    box-shadow: 0 10px 30px rgba(74, 144, 226, 0.3);
+}
+
+.welcome-text h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.welcome-text p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 8px;
+}
+
+.last-login {
+    display: block;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.welcome-icon i {
+    font-size: 90px;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* Modules Section */
+.modules-section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 25px;
+}
+
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 25px;
+}
+
+.module-card {
+    background: var(--bg-secondary);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.module-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4a90e2, #2a5298);
+    transition: width 0.3s ease;
+}
+
+.module-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(74, 144, 226, 0.25);
+}
+
+.module-card:hover::before {
+    width: 100%;
+}
+
+.module-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.module-icon.mental-health {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.module-icon.job-portal {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.module-icon.wheelchair-nav {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.module-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.module-card p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.module-arrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.module-arrow span {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.module-arrow i {
+    font-size: 22px;
+    color: #4a90e2;
+    transition: transform 0.3s ease;
+}
+
+.module-card:hover .module-arrow i {
+    transform: translateX(8px);
+}
+
+/* ============================================
+   FLOATING ELEMENTS
+   ============================================ */
+
+/* Floating SOS Button (Mobile/Tablet) - GREEN by default */
+.floating-sos-btn {
+    display: none;
+    position: fixed;
+    top: 100px;
+    right: 25px;
+    width: 70px;
+    height: 70px;
+    background: var(--sos-safe);
+    border: none;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.5);
+    z-index: 500;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.floating-sos-btn i {
+    font-size: 24px;
+}
+
+.floating-sos-btn.emergency {
+    background: var(--sos-emergency);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5);
+    animation: pulse 2s infinite;
+}
+
+/* SOS Panel */
+.sos-panel {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 450px;
+    height: 100vh;
+    background: var(--bg-secondary);
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+.sos-panel.active {
+    right: 0;
+}
+
+.sos-header {
+    background: linear-gradient(135deg, #4a90e2, #2a5298);
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sos-header h3 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.close-panel {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.sos-content {
+    padding: 30px;
+}
+
+/* SOS Status Indicator */
+.sos-status {
+    margin-bottom: 25px;
+}
+
+.status-indicator {
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.status-indicator.safe {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.status-indicator.emergency {
+    background: linear-gradient(135deg, #ff4757, #ff6348);
+    animation: pulse 2s infinite;
+}
+
+.status-indicator i {
+    font-size: 50px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.status-indicator h4 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+/* SOS Emergency Button */
+.sos-emergency-btn {
+    width: 100%;
+    padding: 20px;
+    background: var(--sos-safe);
+    border: none;
+    border-radius: 15px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.sos-emergency-btn:hover {
+    transform: scale(1.02);
+}
+
+.sos-emergency-btn.emergency {
+    background: var(--sos-emergency);
+    animation: pulse 2s infinite;
+}
+
+.sos-emergency-btn i {
+    font-size: 40px;
+}
+
+.location-display {
+    padding: 20px;
+    background: var(--bg-primary);
+    border-radius: 12px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.location-display i {
+    font-size: 24px;
+    color: #4a90e2;
+}
+
+.location-display p {
+    font-size: 14px;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.emergency-contacts h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 15px;
+}
+
+.contact-list {
+    background: var(--bg-primary);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.contact-list p {
+    text-align: center;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.contact-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.contact-info strong {
+    display: block;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.contact-info p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.delete-contact {
+    background: #ff4757;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.delete-contact:hover {
+    background: #ff6348;
+}
+
+.add-contact-btn {
+    width: 100%;
+    padding: 14px;
+    background: #4a90e2;
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* About Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--bg-primary);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 18px;
+}
+
+.modal-close:hover {
+    background: #ff4757;
+    color: #ffffff;
+}
+
+.modal-header {
+    padding: 40px 40px 20px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header i {
+    font-size: 60px;
+    color: #4a90e2;
+    margin-bottom: 15px;
+}
+
+.modal-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.modal-body {
+    padding: 30px 40px 40px 40px;
+}
+
+.modal-body p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.modal-body h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 25px 0 15px 0;
+}
+
+.modal-body ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal-body ul li {
+    padding: 10px 0;
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.modal-body ul li strong {
+    color: #4a90e2;
+}
+
+.contact-info {
+    background: var(--bg-primary);
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-top: 20px;
+}
+
+.contact-info i {
+    color: #4a90e2;
+    margin-right: 8px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .sos-btn-header span {
+        display: none;
+    }
+    
+    .modules-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-280px);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-wrapper {
+        margin-left: 0;
+    }
+    
+    .floating-sos-btn {
+        display: flex;
+    }
+    
+    .sos-btn-header {
+        display: none;
+    }
+    
+    .page-title {
+        font-size: 20px;
+    }
+    
+    .dashboard-content {
+        padding: 20px;
+    }
+    
+    .welcome-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+    }
+    
+    .welcome-text h2 {
+        font-size: 24px;
+    }
+    
+    .welcome-icon {
+        margin-top: 20px;
+    }
+    
+    .modules-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .user-dropdown-btn span {
+        display: none;
+    }
+    
+    .sos-panel {
+        width: 100%;
+        right: -100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-right {
+        gap: 8px;
+    }
+    
+    .toggle-btn,
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+    
+    .module-card {
+        padding: 30px 20px;
+    }
+}

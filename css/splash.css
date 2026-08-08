@@ -1,0 +1,341 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+/* Splash Container */
+.splash-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4a90e2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.8s ease-in;
+}
+
+/* Animated Background Shapes */
+.background-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0.1;
+}
+
+.shape {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+.shape-1 {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    left: -150px;
+    animation: float 8s ease-in-out infinite;
+}
+
+.shape-2 {
+    width: 200px;
+    height: 200px;
+    top: 60%;
+    right: -100px;
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+.shape-3 {
+    width: 150px;
+    height: 150px;
+    bottom: 10%;
+    left: 15%;
+    animation: float 12s ease-in-out infinite;
+}
+
+.shape-4 {
+    width: 250px;
+    height: 250px;
+    top: 20%;
+    right: 10%;
+    animation: float 9s ease-in-out infinite reverse;
+}
+
+/* Main Content Container */
+.splash-content {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+    animation: slideUp 1s ease-out;
+}
+
+/* Logo Wrapper with Circle Background */
+.logo-wrapper {
+    margin-bottom: 40px;
+    animation: zoomIn 1s ease-out;
+}
+
+.logo-circle {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 15px rgba(255, 255, 255, 0.1),
+                0 0 0 30px rgba(255, 255, 255, 0.05);
+    animation: pulse 3s ease-in-out infinite;
+    position: relative;
+}
+
+.logo-circle::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: rotate 8s linear infinite;
+}
+
+.logo-image {
+    width: 140px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Brand Name */
+.brand-name {
+    font-size: 64px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 8px;
+    margin-bottom: 15px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    animation: fadeInText 1.2s ease-out 0.3s backwards;
+}
+
+/* Tagline */
+.tagline {
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 4px;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    animation: fadeInText 1.2s ease-out 0.5s backwards;
+}
+
+/* Loading Container */
+.loading-container {
+    margin-top: 50px;
+    animation: fadeInText 1.2s ease-out 0.7s backwards;
+}
+
+.loading-bar {
+    width: 280px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    margin: 0 auto 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loading-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #ffffff 0%, #e3f2fd 100%);
+    border-radius: 10px;
+    width: 0%;
+    animation: loadProgress 3s ease-out forwards;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.loading-text {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+/* Bottom Decoration */
+.bottom-decoration {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.5) 50%, 
+        transparent 100%);
+    animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                    0 0 0 15px rgba(255, 255, 255, 0.1),
+                    0 0 0 30px rgba(255, 255, 255, 0.05);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4),
+                    0 0 0 20px rgba(255, 255, 255, 0.15),
+                    0 0 0 40px rgba(255, 255, 255, 0.08);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loadProgress {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) translateX(0);
+    }
+    50% {
+        transform: translateY(-30px) translateX(20px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .logo-circle {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .logo-image {
+        width: 110px;
+    }
+    
+    .brand-name {
+        font-size: 48px;
+        letter-spacing: 5px;
+    }
+    
+    .tagline {
+        font-size: 14px;
+        letter-spacing: 3px;
+    }
+    
+    .loading-bar {
+        width: 220px;
+    }
+    
+    .shape-1, .shape-2, .shape-3, .shape-4 {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-circle {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .logo-image {
+        width: 95px;
+    }
+    
+    .brand-name {
+        font-size: 36px;
+        letter-spacing: 4px;
+    }
+    
+    .tagline {
+        font-size: 12px;
+        letter-spacing: 2px;
+        margin-bottom: 40px;
+    }
+    
+    .loading-bar {
+        width: 180px;
+    }
+}

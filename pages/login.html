@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Abilify</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Auth CSS -->
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+    
+    <!-- Main Container -->
+    <div class="auth-container">
+        
+        <!-- Left Side - Branding -->
+        <div class="auth-left">
+            <div class="branding-content">
+                <div class="logo-section">
+                    <img src="../assets/abilify-logo.png" alt="Abilify Logo" class="auth-logo">
+                </div>
+                <h1 class="brand-title">ABILIFY</h1>
+                <p class="brand-subtitle">A UNIFIED PLATFORM FOR DISABLES USING AI</p>
+                
+                <!-- Feature List -->
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Emergency SOS Alert</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Inclusive Job Portal</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-wheelchair"></i>
+                        <span>Wheelchair Navigation</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-comments"></i>
+                        <span>Mental Health Support</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Decorative Shapes -->
+            <div class="shape-decoration shape-1"></div>
+            <div class="shape-decoration shape-2"></div>
+        </div>
+        
+        <!-- Right Side - Login Form -->
+        <div class="auth-right">
+            <div class="form-container">
+                
+                <!-- Welcome Header -->
+                <div class="form-header">
+                    <h2 class="form-title">Welcome Back!</h2>
+                    <p class="form-subtitle">Login to access your personalized accessibility dashboard</p>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form">
+                    
+                    <!-- Email Input -->
+                    <div class="form-group">
+                        <label for="email" class="form-label">
+                            <i class="fas fa-envelope"></i> Email Address
+                        </label>
+                        <input 
+                            type="email" 
+                            class="form-control" 
+                            id="email" 
+                            placeholder="Enter your email"
+                            required
+                            aria-label="Email Address"
+                        >
+                    </div>
+                    
+                    <!-- Password Input -->
+                    <div class="form-group">
+                        <label for="password" class="form-label">
+                            <i class="fas fa-lock"></i> Password
+                        </label>
+                        <div class="password-input-wrapper">
+                            <input 
+                                type="password" 
+                                class="form-control" 
+                                id="password" 
+                                placeholder="Enter your password"
+                                required
+                                aria-label="Password"
+                            >
+                            <button 
+                                type="button" 
+                                class="password-toggle" 
+                                onclick="togglePassword('password')"
+                                aria-label="Toggle password visibility"
+                                title="Show/Hide password">
+                                <i class="fas fa-eye" id="password-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Remember Me & Forgot Password -->
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember" class="form-check-input">
+                            <label for="remember" class="form-check-label">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <!-- Login Button -->
+                    <button type="submit" class="btn-primary-custom">
+                        <span>Login</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    
+                    <!-- Divider -->
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <!-- Social Login (Optional) -->
+                    <div class="social-login">
+                        <button type="button" id="googleLogin" class="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center" style="gap: 10px; padding: 12px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
+        <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+        <path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+        <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+        <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+    </svg>
+    <span>Continue with Google</span>
+</button>
+
+                    </div>
+                    
+                    <!-- Signup Link -->
+                    <div class="auth-switch">
+                        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+      // Import Firebase modules from CDN
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+      // Your Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyACjw5BYrmd_sFogPezXchBZeAEQzEoI0E",
+        authDomain: "abilify-17167.firebaseapp.com",
+        projectId: "abilify-17167",
+        storageBucket: "abilify-17167.firebasestorage.app",
+        messagingSenderId: "539511041142",
+        appId: "1:539511041142:web:76920dd5204ee384e00357",
+        measurementId: "G-D5WHELPYR9"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // Make Firebase Auth available globally for auth.js
+      window.firebaseAuth = auth;
+      window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+      window.GoogleAuthProvider = GoogleAuthProvider;
+      window.signInWithPopup = signInWithPopup;
+    </script>
+
+    <!-- Custom Auth JS -->
+    <script src="../js/auth.js"></script>
+
+</body>
+</html>
+
+    
+    <!-- Custom Auth JS -->
+    <script src="../js/auth.js"></script>
+    
+</body>
+</html>

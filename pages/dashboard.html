@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Abilify</title>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Dashboard CSS -->
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="light-mode">
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        
+        <!-- Logo Section -->
+        <div class="sidebar-logo">
+            <img src="../assets/abilify-logo.png" alt="Abilify Logo">
+        </div>
+        
+        <!-- User Profile Card -->
+        <div class="user-profile-card">
+            <div class="user-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="user-details">
+                <h4 class="user-name" id="sidebarUserName">Guest User</h4>
+                <p class="user-email" id="sidebarUserEmail">guest@abilify.com</p>
+            </div>
+        </div>
+        
+        <!-- Navigation Buttons -->
+        <div class="sidebar-nav">
+            <button class="nav-btn active" onclick="showDashboard()" aria-label="Dashboard">
+                <i class="fas fa-home"></i>
+                <span class="nav-text">Dashboard</span>
+            </button>
+            
+            <button class="nav-btn" onclick="showSOSPanel()" aria-label="SOS Alert">
+                <i class="fas fa-shield-alt"></i>
+                <span class="nav-text">SOS Alert</span>
+            </button>
+            
+            <button class="nav-btn" onclick="navigateToModule('job-portal.html')" aria-label="Job Portal">
+                <i class="fas fa-briefcase"></i>
+                <span class="nav-text">Job Portal</span>
+            </button>
+            
+            <button class="nav-btn" onclick="navigateToModule('mental-health.html')" aria-label="Mental Health Chatbot">
+                <i class="fas fa-comments"></i>
+                <span class="nav-text">Mental Health</span>
+            </button>
+            
+            <button class="nav-btn" onclick="navigateToModule('navigation.html')" aria-label="Wheelchair Navigation">
+                <i class="fas fa-wheelchair"></i>
+                <span class="nav-text">Navigation</span>
+            </button>
+            
+            <button class="nav-btn" onclick="showAbout()" aria-label="About">
+                <i class="fas fa-info-circle"></i>
+                <span class="nav-text">About</span>
+            </button>
+        </div>
+        
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+            <button class="nav-btn" onclick="showSettings()" aria-label="Settings">
+                <i class="fas fa-cog"></i>
+                <span class="nav-text">Settings</span>
+            </button>
+            <button class="nav-btn" onclick="handleLogout()" aria-label="Logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="nav-text">Logout</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper" id="mainWrapper">
+        
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Dashboard</h1>
+            </div>
+            
+            <div class="header-right">
+                <!-- User Dropdown -->
+                <div class="user-dropdown" id="userDropdown">
+                    <button class="user-dropdown-btn" onclick="toggleUserDropdown()" aria-label="User Menu">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="headerUserName">Guest User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="#" onclick="showProfile()"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#" onclick="showSettings()"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+                
+                <!-- Theme Toggle -->
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <!-- SOS Button (Green by default, Red when activated) -->
+                <button class="sos-btn-header" id="sosBtn" onclick="activateSOS()" aria-label="SOS Alert">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>SOS</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Content -->
+        <main class="dashboard-content">
+            
+            <!-- Welcome Banner -->
+            <section class="welcome-banner">
+                <div class="welcome-text">
+                    <h2>👋 Welcome back, <span id="welcomeUserName">Guest</span>!</h2>
+                    <p>Empowering every ability with inclusive accessibility services</p>
+                    <small class="last-login">Last login: <span id="lastLoginTime">Just now</span></small>
+                </div>
+                <div class="welcome-icon">
+                    <i class="fas fa-universal-access"></i>
+                </div>
+            </section>
+
+            <!-- Feature Modules Section -->
+            <section class="modules-section">
+                <h2 class="section-title">Your Accessibility Services</h2>
+                
+                <div class="modules-grid">
+                    
+      <!-- Mental Health Chatbot Card - MindCare -->
+<div class="module-card" onclick="navigateToModule('mental-health.html')">
+    <div class="module-icon mental-health">
+        <i class="fas fa-brain"></i>
+    </div>
+    <h3>MindCare</h3>
+    <p>AI-powered mental health support chatbot providing 24/7 emotional assistance and guidance</p>
+    <div class="module-arrow">
+        <span>Click to open</span>
+        <i class="fas fa-arrow-right"></i>
+    </div>
+</div>
+
+
+
+                    <!-- Job Portal Card -->
+                    <div class="module-card" onclick="navigateToModule('job-portal.html')">
+                        <div class="module-icon job-portal">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Inclusive Job Portal</h3>
+                        <p>Accessibility-focused job search and matching platform for equal opportunities</p>
+                        <div class="module-arrow">
+                            <span>Click to open</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Mental Health Chatbot Card -->
+
+                      <!-- Wheelchair Navigation Card -->
+                                      <div class="module-card" onclick="navigateToModule('navigation.html')">
+
+
+
+                           <div class="module-icon wheelchair-nav">
+                            <i class="fas fa-wheelchair"></i>
+                        </div>
+                        <h3>Wheelchair Navigation</h3>
+                        <p>Accessible route planning with real-time guidance and elevation data</p>
+                        <div class="module-arrow">
+                            <span>Click to open</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Floating SOS Button (Mobile/Tablet) -->
+    <button class="floating-sos-btn" id="floatingSosBtn" onclick="activateSOS()" aria-label="Emergency SOS">
+        <i class="fas fa-shield-alt"></i>
+        <span>SOS</span>
+    </button>
+
+    <!-- SOS Panel (Slides from right) -->
+    <div class="sos-panel" id="sosPanel">
+        <div class="sos-header">
+            <h3><i class="fas fa-shield-alt"></i> SOS Alert System</h3>
+            <button class="close-panel" onclick="closeSOSPanel()" aria-label="Close SOS Panel">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sos-content">
+            <div class="sos-status" id="sosStatus">
+                <div class="status-indicator safe" id="statusIndicator">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Status: Safe</h4>
+                </div>
+            </div>
+            
+            <button class="sos-emergency-btn" id="emergencyBtn" onclick="sendEmergencyAlert()">
+                <i class="fas fa-bell"></i>
+                <span>ACTIVATE EMERGENCY</span>
+            </button>
+            
+            <div class="location-display">
+                <i class="fas fa-map-marker-alt"></i>
+                <p id="locationText">Detecting your location...</p>
+            </div>
+            
+            <div class="emergency-contacts">
+                <h4>Emergency Contacts</h4>
+                <div class="contact-list" id="contactList">
+                    <p>No contacts added yet</p>
+                </div>
+                <button class="add-contact-btn" onclick="showAddContact()">
+                    <i class="fas fa-plus"></i> Add Contact
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay for panels -->
+    <div class="overlay" id="overlay" onclick="closeAllPanels()"></div>
+
+    <!-- About Modal -->
+    <div class="modal-overlay" id="aboutModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAbout()" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <i class="fas fa-universal-access"></i>
+                <h2>About Abilify</h2>
+            </div>
+            <div class="modal-body">
+                <p><strong>Abilify</strong> is an inclusive, web-based platform designed to empower individuals with disabilities by integrating essential accessibility services into a unified digital environment.</p>
+                
+                <h3>Our Services</h3>
+                <ul>
+                    <li><strong>SOS Alert:</strong> One-tap emergency alerts with location sharing</li>
+                    <li><strong>Sign Language Recognition:</strong> Real-time ISL gesture recognition</li>
+                    <li><strong>Job Portal:</strong> Inclusive employment opportunities</li>
+                    <li><strong>Mental Health Support:</strong> AI-powered wellness companion</li>
+                    <li><strong>Wheelchair Navigation:</strong> Accessible route planning</li>
+                </ul>
+                
+                <h3>Our Mission</h3>
+                <p>To promote independence, safety, and social inclusion by minimizing barriers and reducing reliance on external help.</p>
+                
+                <p class="contact-info">
+                    <i class="fas fa-envelope"></i> contact@abilify.com<br>
+                    <i class="fas fa-phone"></i> +91 12345 67890
+                </p>
+            </div>
+        </div>
+    </div>
+      <!-- EmailJS Library (ADD THIS) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+
+    <!-- Custom Dashboard JS -->
+    <script src="../js/dashboard.js"></script>
+
+</body>
+</html>

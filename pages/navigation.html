@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheelchair Navigation - Abilify</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/navigation.css">
+</head>
+<body>
+    
+    <!-- HEADER -->
+    <header class="navigation-header">
+        <div class="header-container">
+            <button class="back-btn" onclick="window.location.href='dashboard.html'">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Dashboard</span>
+            </button>
+            
+            <div class="header-title">
+                <img src="../assets/abilify-logo.png" alt="Abilify Logo" class="logo">
+                <h1><i class="fas fa-wheelchair"></i> Wheelchair Navigation</h1>
+            </div>
+            
+            <div class="accessibility-btns">
+                <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="icon-btn" id="fontToggle" onclick="toggleFontSize()" title="Increase Font Size">
+                    <i class="fas fa-text-height"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-container">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            
+            <!-- SEARCH SECTION -->
+            <section class="search-section">
+                <h2><i class="fas fa-search"></i> Search Location</h2>
+                <input type="text" id="searchInput" class="search-input" 
+                       placeholder="Search for a place..." />
+                <button class="primary-btn" onclick="searchPlace()">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </section>
+
+            <!-- DIRECTIONS SECTION -->
+            <section class="directions-section">
+                <h2><i class="fas fa-route"></i> Get Directions</h2>
+                <input type="text" id="startLocation" class="search-input" 
+                       placeholder="Starting point..." />
+                <input type="text" id="endLocation" class="search-input" 
+                       placeholder="Destination..." />
+                <button class="primary-btn" onclick="getDirections()">
+                    <i class="fas fa-directions"></i> Get Route
+                </button>
+                <button class="secondary-btn" onclick="clearRoute()">
+                    <i class="fas fa-times"></i> Clear
+                </button>
+                
+                <!-- Route Info Panel -->
+                <div id="routeInfo" class="route-info">
+                    <p><strong>📍 From:</strong> <span id="routeFrom"></span></p>
+                    <p><strong>📍 To:</strong> <span id="routeTo"></span></p>
+                    <p><strong>🚶 Distance:</strong> <span id="routeDistance"></span></p>
+                    <p><strong>⏱️ Time:</strong> <span id="routeTime"></span></p>
+                </div>
+            </section>
+
+            <!-- CURRENT LOCATION -->
+            <section class="current-location-section">
+                <h2><i class="fas fa-location-crosshairs"></i> My Location</h2>
+                <button class="secondary-btn" onclick="getCurrentLocation()">
+                    <i class="fas fa-location-dot"></i> Get Current Location
+                </button>
+            </section>
+
+            
+           <!-- NEARBY ACCESSIBLE PLACES -->
+<section class="nearby-section">
+    <h2><i class="fas fa-map-marker-alt"></i> Find Nearby</h2>
+    <div class="nearby-buttons">
+        <button class="filter-btn" onclick="findNearby('hospital')">
+            <i class="fas fa-hospital"></i> Hospitals
+        </button>
+        <button class="filter-btn" onclick="findNearby('pharmacy')">
+            <i class="fas fa-pills"></i> Pharmacy
+        </button>
+        <button class="filter-btn" onclick="findNearby('toilet')">
+            <i class="fas fa-restroom"></i> Restrooms
+        </button>
+        <button class="filter-btn" onclick="findNearby('clinic')">
+            <i class="fas fa-clinic-medical"></i> Clinics
+        </button>
+        <button class="filter-btn" onclick="findNearby('accessible')">
+            <i class="fas fa-wheelchair"></i> Accessible
+        </button>
+        <button class="filter-btn" onclick="findNearby('parking')">
+            <i class="fas fa-parking"></i> Parking
+        </button>
+    </div>
+</section>
+
+
+            <!-- SAVED FAVORITES -->
+            <section class="favorites-section">
+                <h2><i class="fas fa-star"></i> Saved Routes</h2>
+                <div id="favoritesList" class="favorites-list">
+                    <!-- Favorites populated by JS -->
+                </div>
+                <button class="secondary-btn" onclick="saveFavorite()">
+                    <i class="fas fa-save"></i> Save Current Route
+                </button>
+            </section>
+            
+        </aside>
+
+        <!-- MAP CONTAINER -->
+        <div class="map-container">
+            <div id="map"></div>
+            
+            <!-- Map Controls Overlay -->
+            <div class="map-controls">
+                <button class="map-btn" onclick="map.zoomIn()" title="Zoom In">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="map-btn" onclick="map.zoomOut()" title="Zoom Out">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button class="map-btn" onclick="getCurrentLocation()" title="My Location">
+                    <i class="fas fa-location-crosshairs"></i>
+                </button>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Finding best wheelchair route...</p>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Leaflet Routing Machine JS -->
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="../js/navigation.js"></script>
+    
+</body>
+</html>

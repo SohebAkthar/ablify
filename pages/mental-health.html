@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Support - Abilify</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Chatbot CSS -->
+    <link rel="stylesheet" href="../css/chatbot.css">
+</head>
+<body>
+
+    <!-- Main Chatbot Container -->
+    <div class="chatbot-container">
+        
+        <!-- ========== HEADER ========== -->
+        <header class="chat-header">
+            <div class="header-left">
+                <button class="back-btn" onclick="window.location.href='dashboard.html'" aria-label="Back to Dashboard">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+                
+                <div class="bot-info">
+                    <div class="bot-avatar">
+                        <span class="bot-emoji">🧠</span>
+                    </div>
+                    <div class="bot-details">
+                        <h2 class="bot-name">MindCare Assistant</h2>
+                        <p class="bot-status">
+                            <span class="status-dot"></span>
+                            Always here for you
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <button class="icon-btn" id="clearChatBtn" title="Clear conversation" aria-label="Clear Chat">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <button class="icon-btn" id="infoBtn" title="About this chatbot" aria-label="Information">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- ========== CHAT MESSAGES AREA ========== -->
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be dynamically added here by JavaScript -->
+            <!-- Initial welcome message removed - chatbot.js will handle it -->
+        </div>
+
+        <!-- ========== QUICK ACTION BUTTONS ========== -->
+        <div class="quick-actions" id="quickActions">
+            <button class="quick-btn" data-message="I'm feeling anxious">
+                <span class="quick-icon">😰</span>
+                <span class="quick-text">Feeling Anxious</span>
+            </button>
+            <button class="quick-btn" data-message="I'm feeling sad">
+                <span class="quick-icon">😢</span>
+                <span class="quick-text">Feeling Sad</span>
+            </button>
+            <button class="quick-btn" data-message="I can't sleep">
+                <span class="quick-icon">😴</span>
+                <span class="quick-text">Sleep Issues</span>
+            </button>
+            <button class="quick-btn" data-message="I need motivation">
+                <span class="quick-icon">🎯</span>
+                <span class="quick-text">Need Motivation</span>
+            </button>
+        </div>
+
+        <!-- ========== INPUT AREA ========== -->
+        <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+                <textarea 
+                    id="userInput" 
+                    class="chat-input" 
+                    placeholder="Type your message here..."
+                    rows="1"
+                    maxlength="500"
+                    aria-label="Type your message"
+                ></textarea>
+                <button class="send-btn" id="sendButton" aria-label="Send Message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <p class="disclaimer">
+                <i class="fas fa-info-circle"></i>
+                This chatbot provides support but is not a substitute for professional mental health care.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- ========== EMERGENCY CRISIS MODAL ========== -->
+    <div class="emergency-overlay" id="emergencyOverlay" style="display: none;">
+        <div class="emergency-modal">
+            <div class="emergency-header">
+                <span class="emergency-icon">🚨</span>
+                <h2>Immediate Help Available</h2>
+            </div>
+            
+            <div class="emergency-content">
+                <p class="emergency-message">
+                    <strong>If you're in crisis or thinking of hurting yourself, please reach out immediately:</strong>
+                </p>
+                
+                <div class="helpline-list">
+                    <a href="tel:9152987821" class="helpline-item">
+                        <span class="helpline-icon"><i class="fas fa-phone"></i></span>
+                        <div class="helpline-info">
+                            <strong>iCall (24/7 Free)</strong>
+                            <p>9152987821</p>
+                        </div>
+                    </a>
+                    
+                    <a href="tel:9820466726" class="helpline-item">
+                        <span class="helpline-icon"><i class="fas fa-phone"></i></span>
+                        <div class="helpline-info">
+                            <strong>AASRA (24/7)</strong>
+                            <p>9820466726</p>
+                        </div>
+                    </a>
+                    
+                    <a href="tel:08046110007" class="helpline-item">
+                        <span class="helpline-icon"><i class="fas fa-phone"></i></span>
+                        <div class="helpline-info">
+                            <strong>NIMHANS Helpline</strong>
+                            <p>080-46110007</p>
+                        </div>
+                    </a>
+                    
+                    <a href="tel:112" class="helpline-item emergency-112">
+                        <span class="helpline-icon"><i class="fas fa-ambulance"></i></span>
+                        <div class="helpline-info">
+                            <strong>Emergency Services</strong>
+                            <p>112</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <p class="emergency-note">
+                    <i class="fas fa-heart"></i>
+                    Your life matters. Help is available right now.
+                </p>
+            </div>
+            
+            <button class="close-emergency-btn" id="closeEmergencyBtn">
+                Continue Chat
+            </button>
+        </div>
+    </div>
+
+    <!-- ========== INFO MODAL ========== -->
+    <div class="info-overlay" id="infoOverlay" style="display: none;">
+        <div class="info-modal">
+            <button class="close-modal-btn" id="closeInfoBtn" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="info-header">
+                <i class="fas fa-brain"></i>
+                <h2>About MindCare</h2>
+            </div>
+            
+            <div class="info-content">
+                <p><strong>MindCare</strong> is an AI-powered mental health support chatbot designed to provide immediate, compassionate support for mental well-being.</p>
+                
+                <h3><i class="fas fa-shield-alt"></i> What We Offer:</h3>
+                <ul>
+                    <li>24/7 emotional support and guidance</li>
+                    <li>Evidence-based coping techniques</li>
+                    <li>Crisis intervention resources</li>
+                    <li>Confidential, judgment-free space</li>
+                </ul>
+                
+                <h3><i class="fas fa-exclamation-triangle"></i> Important:</h3>
+                <ul>
+                    <li>This chatbot is NOT a replacement for professional help</li>
+                    <li>For emergencies, call helplines immediately</li>
+                    <li>Conversations are not stored permanently</li>
+                </ul>
+                
+                <div class="info-footer">
+                    <p><i class="fas fa-heart"></i> Part of <strong>Abilify</strong> - Empowering Every Ability</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MAIN CHATBOT BRAIN ========== -->
+    <script src="../js/chatbot.js"></script>
+
+    <!-- ========== UI INTEGRATION HANDLERS ========== -->
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Clear chat button handler
+            const clearChatBtn = document.getElementById('clearChatBtn');
+            if (clearChatBtn) {
+                clearChatBtn.addEventListener('click', function() {
+                    if (confirm('Are you sure you want to clear the conversation?')) {
+                        if (typeof clearChatHistory === 'function') {
+                            clearChatHistory();
+                        } else {
+                            console.error('clearChatHistory function not found');
+                        }
+                    }
+                });
+            }
+
+            // Info button handler
+            const infoBtn = document.getElementById('infoBtn');
+            const infoOverlay = document.getElementById('infoOverlay');
+            if (infoBtn && infoOverlay) {
+                infoBtn.addEventListener('click', function() {
+                    infoOverlay.style.display = 'flex';
+                });
+            }
+
+            // Close info modal
+            const closeInfoBtn = document.getElementById('closeInfoBtn');
+            if (closeInfoBtn && infoOverlay) {
+                closeInfoBtn.addEventListener('click', function() {
+                    infoOverlay.style.display = 'none';
+                });
+            }
+
+            // Close emergency modal
+            const closeEmergencyBtn = document.getElementById('closeEmergencyBtn');
+            const emergencyOverlay = document.getElementById('emergencyOverlay');
+            if (closeEmergencyBtn && emergencyOverlay) {
+                closeEmergencyBtn.addEventListener('click', function() {
+                    emergencyOverlay.style.display = 'none';
+                });
+            }
+
+            // Quick action buttons
+            const quickBtns = document.querySelectorAll('.quick-btn');
+            const userInput = document.getElementById('userInput');
+            
+            quickBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const message = this.getAttribute('data-message');
+                    if (userInput) {
+                        userInput.value = message;
+                        // Trigger send
+                        if (typeof handleSendMessage === 'function') {
+                            handleSendMessage();
+                        } else {
+                            console.error('handleSendMessage function not found');
+                        }
+                    }
+                });
+            });
+
+            // Close modals when clicking outside
+            if (infoOverlay) {
+                infoOverlay.addEventListener('click', function(e) {
+                    if (e.target === infoOverlay) {
+                        infoOverlay.style.display = 'none';
+                    }
+                });
+            }
+
+            if (emergencyOverlay) {
+                emergencyOverlay.addEventListener('click', function(e) {
+                    if (e.target === emergencyOverlay) {
+                        // Don't allow closing emergency overlay by clicking outside
+                        // User must click "Continue Chat" button
+                    }
+                });
+            }
+
+            // Keyboard shortcut: Escape to close info modal
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (infoOverlay && infoOverlay.style.display === 'flex') {
+                        infoOverlay.style.display = 'none';
+                    }
+                }
+            });
+
+            console.log('✅ UI handlers initialized successfully');
+        });
+    </script>
+
+</body>
+</html>
