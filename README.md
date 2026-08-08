@@ -4,7 +4,7 @@
 
 ---
 
-## 🔗 Live Demo
+## 🌐 Live Demo
 
 👉 [View ABILIFY Live Demo]( https://sohebakthar.github.io/ablify/)
 
@@ -64,6 +64,27 @@ Provides a dedicated mental-health support section with an accessible interface.
 
 ### 🤖 AI Chatbot
 Provides conversational assistance to help users interact with the platform.
+
+---
+
+## 👨‍💻 My Contribution
+
+### 🧠 MindCare Module
+
+I contributed to the development of the **MindCare module** of ABILIFY.
+
+My responsibilities included:
+
+- Developed the MindCare chatbot interface.
+- Implemented conversational interactions using JavaScript.
+- Added predefined responses and intent-based interactions.
+- Implemented mental-health support and coping-related responses.
+- Added crisis-related detection and appropriate emergency guidance.
+- Implemented voice input functionality.
+- Added accessibility features such as screen-reader announcements.
+- Worked on chat history and conversation management.
+- Tested and debugged the MindCare module.
+- Integrated the MindCare module with the overall ABILIFY platform.
 
 ---
 
